@@ -83,6 +83,7 @@ a:hover {
 .header-logo img {
   max-width: 100%;
   display: block;
+  width: 245px;
 }
 .header-btns ul {
   text-align: right;
@@ -115,12 +116,12 @@ a:hover {
   color: #fff;
   border: 1px solid #000;
 }
-.header-btns ul li:nth-child(2) a {
+.header-btns ul li:nth-child(1) a {
   background-color: initial;
   transition: 0.3s;
   color: #fff;
 }
-.header-btns ul li:nth-child(2) a:hover {
+.header-btns ul li:nth-child(1) a:hover {
   background-color: #fff;
   color: #000;
   border: 1px solid #fff;
