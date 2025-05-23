@@ -13,6 +13,189 @@
         <link rel="shortcut icon" href="img/fav-icon.png" type="image/x-icon">
         <link rel="stylesheet" href="css/style.css">
         <link rel="stylesheet" href="css/responsive.css">
+        <!-- ================== Age Verification Popup Start =================== -->
+        <div class="cookie-overlay show-overlay"></div>
+        <div class="age-verification-popup" id="cookiePopup">
+        <div class="age-verification-modal">
+            <div class="age-lock-icon">
+                <img src="img/padlock.png" alt="padlock">
+            </div>
+            <h3 class="age-title">Age Verification</h3>
+            <div class="age-separator"></div>
+            <p class="age-message">You must be 18 or over to access this website.<br>If you are under 18 – you have to leave</p>
+            <button onclick="acceptCookies()" class="age-btn green">
+            Yes, I'm over 18
+            <span class="icon">&#10004;</span>
+            </button>
+            <div class="age-or">OR</div>
+            <button onclick="exitSite()" class="age-btn red">
+            No, take me out of here
+            <span class="icon">&#10006;</span>
+            </button>
+        </div>
+        </div>
+        <!-- ================== Age Verification Popup End =================== -->
+         <style>
+            .cookie-overlay {
+                position: fixed;
+                inset: 0;
+                background-image: linear-gradient(#0000009a, #000000b9);
+                backdrop-filter: blur(16px);
+                -webkit-backdrop-filter: blur(16px);
+                z-index: 9999;
+                display: none;
+            }
+            .show-overlay {
+                display: block;
+            }
+
+            .age-verification-popup {
+                display: none;
+                position: fixed;
+                left: 0; right: 0; top: 0; bottom: 0;
+                z-index: 10000;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                font-family: 'Poppins',sans-serif;
+            }
+            .age-verification-popup.show {
+                display: flex;
+            }
+
+            .age-verification-modal {
+                background: #f7f7f7;
+                border-radius: 12px;
+                box-shadow: 0 8px 32px rgba(60, 60, 90, 0.14);
+                max-width: 360px;
+                width: 90%;
+                padding: 35px 24px 40px 24px;
+                text-align: center;
+                position: relative;
+            }
+
+            .age-lock-icon {
+                margin-bottom: 12px;
+            }
+
+            .age-lock-icon img {
+                filter: invert(0.7);
+            }
+            
+            .age-title {
+                font-size: 26px;
+                font-weight: 600;
+                margin-bottom: 20px;
+                color: #222;
+            }
+            .age-separator {
+                border-top: 2px dotted #bbb;
+                width: 70%;
+                margin: 0 auto 20px auto;
+            }
+            .age-message {
+                font-size: 15px;
+                color: #444;
+                margin-bottom: 35px;
+                line-height: 1.6;
+            }
+            .age-btn {
+                width: 100%;
+                padding: 15px 0;
+                margin-bottom: 10px;
+                font-size: 16px;
+                font-family: 'Poppins',sans-serif;
+                font-weight: 500;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                transition: filter 0.15s, transform 0.13s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 10px;
+            }
+            .age-btn.green {
+                background: #0f4fef;
+                color: #fff;
+            }
+            .age-btn.green:hover {
+                filter: brightness(1.1);
+                transform: translateY(-1px) scale(1.02);
+            }
+            .age-btn.red {
+                background: #ff8022;
+                color: #fff;
+            }
+            .age-btn.red:hover {
+                filter: brightness(1.12);
+                transform: translateY(-1px) scale(1.02);
+            }
+            .age-or {
+                color: #999;
+                font-size: 16px;
+                font-weight: 600;
+                margin-bottom: 8px;
+            }
+            .icon {
+                font-size: 17px;
+                font-weight: 600;
+            }
+
+            @media (max-width: 600px) {
+                .age-verification-modal {padding: 22px 6px 22px 6px;}
+                .age-title {font-size: 20px;}
+                .age-message {font-size: 13.5px;}
+                .age-btn {font-size: 14px; padding: 12px 0;}
+            }
+
+         </style>
+        <script>
+            document.addEventListener("DOMContentLoaded", function () {
+                if (!getCookie("acceptedCookies")) {
+                    document.querySelector(".cookie-overlay").classList.add("show-overlay");
+                    document.getElementById("cookiePopup").classList.add("show");
+                } else {
+                    document.querySelector(".cookie-overlay").classList.remove("show-overlay");
+                    document.getElementById("cookiePopup").classList.remove("show");
+                }
+            });
+
+            function acceptCookies() {
+                document.getElementById("cookiePopup").classList.remove("show");
+                document.querySelector(".cookie-overlay").classList.remove("show-overlay");
+                setCookie("acceptedCookies", true, 30);
+                // Optionally reload or continue site access
+            }
+
+            function exitSite() {
+                // Redirects user away (customize as needed)
+                window.location.href = "https://betchaplay.co.nz/";
+            }
+
+            function setCookie(name, value, days) {
+                var expires = "";
+                if (days) {
+                    var date = new Date();
+                    date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
+                    expires = "; expires=" + date.toUTCString();
+                }
+                document.cookie = name + "=" + (value || "") + expires + "; path=/";
+            }
+
+            function getCookie(name) {
+                var nameEQ = name + "=";
+                var ca = document.cookie.split(';');
+                for (var i = 0; i < ca.length; i++) {
+                    var c = ca[i];
+                    while (c.charAt(0) == ' ') c = c.substring(1, c.length);
+                    if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length, c.length);
+                }
+                return null;
+            }
+        </script>
+
+
     </head>
     <body>
         <section class="headertop-area">
